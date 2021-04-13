@@ -2,15 +2,8 @@ require('dotenv').config();
 const fs = require('fs')
 const https = require('https')
 
-let application = fs.readFileSync('./application.yml', 'utf8')
+const application = fs.readFileSync('./application.yml', 'utf8')
 
-if (process.env.PORT) {
-    application = application.replace('DYNAMICPORT', process.env.PORT)
-}
-
-if (process.env.PASS) {
-    application = application.replace('youshallnotpass', process.env.PASS)
-}
 fs.writeFileSync('./application.yml', application)
 
 const download = function (url, dest, cb) { //modified code from https://stackoverflow.com/a/22907134
@@ -55,8 +48,8 @@ function startLavalink() {
         keepAlive();
 }
 
-const cdn = 'https://cdn.lavalink.ga/v3.3.2.1/Lavalink.jar'
-download(cdn, './Lavalink.jar', startLavalink)
+const cdn = 'https://ci.fredboat.com/repository/download/Lavalink_Build/.lastSuccessful/Lavalink.jar?guest=1&branch=refs/heads/dev';
+download(cdn, './Lavalink.jar', startLavalink);
 
 
 function keepAlive() {
