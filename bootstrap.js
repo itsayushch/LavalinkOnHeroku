@@ -2,7 +2,12 @@ require('dotenv').config();
 const fs = require('fs')
 const https = require('https')
 
-const application = fs.readFileSync('./application.yml', 'utf8')
+let application = fs.readFileSync('./application.yml', 'utf8');
+
+if (process.env.PORT) {
+    application = application.replace('DYNAMICPORT', process.env.PORT)
+}
+
 
 fs.writeFileSync('./application.yml', application)
 
