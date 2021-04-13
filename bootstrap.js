@@ -5,7 +5,8 @@ const https = require('https')
 let application = fs.readFileSync('./application.yml', 'utf8');
 
 if (process.env.PORT) {
-    application = application.replace('DYNAMICPORT', process.env.PORT)
+    application = application.replace('DYNAMICPORT', process.env.PORT);
+    console.log(process.env.PORT);
 }
 
 
